@@ -1,42 +1,9 @@
-const clock = document.querySelector('.clock');
-const messageEl = document.querySelector('.message');
-const partyBtn = document.querySelector('.party-btn');
-partyBtn.addEventListener('click', startParty)
-const imageEl = document.querySelector('.img-container>img');
-const partyImgEl = document.querySelector('.img-container div')
-console.log(partyImgEl)
-let messageText = '';
-let isParty = false;
-let hour = 0;
-
-function time() {
-    let date = new Date();
-    let ho = date.getHours();
-    hour = ho;
-    let ampm = ho >= 12 ? 'pm' : 'am';
-    h = ho > 12 ? ho % 12 : ho;
-    h = addZero(h);
-    let min = date.getMinutes();
-    let m = addZero(min);
-    let sec = date.getSeconds();
-    let s = addZero(sec);
-    clock.textContent = `${h}:${m}:${s} ${ampm}.`;
-    // console.log(`${h}:${m}:${s} ${ampm}`);
-    if (isParty === false && (h>7 && h<12)) {
-        setImgAndTitle('morning');
-    }
-    if (isParty === false && (h>=12 && h<15)) {
-        setImgAndTitle('noon');
-    }
-    if (isParty === false && (h>13 && h<18)) {
-        setImgAndTitle('coding');
-    }
-}
-
-setInterval(time, 1000);
-
-function addZero(d) {
-    return d < 10 ? `0${d}` : d;
+const elements = {
+    clock: document.querySelector('.clock'),
+    messageEl: document.querySelector('.message'),
+    partyBtn: document.querySelector('.party-btn'),
+    imageEl: document.querySelector('.img-container>img'),
+    partyImgEl: document.querySelector('.img-container div')
 }
 
 const titlesAndImgs = {
@@ -52,26 +19,61 @@ const titlesAndImgs = {
     
 }
 
+elements.partyBtn.addEventListener('click', startParty)
+let messageText = '';
+let isParty = false;
+let hour = 0;
+
+function time() {
+    let date = new Date();
+    let ho = date.getHours();
+    hour = ho;
+    let ampm = ho >= 12 ? 'pm' : 'am';
+    h = ho > 12 ? ho % 12 : ho;
+    h = addZero(h);
+    let min = date.getMinutes();
+    let m = addZero(min);
+    let sec = date.getSeconds();
+    let s = addZero(sec);
+    elements.clock.textContent = `${h}:${m}:${s} ${ampm}.`;
+    // console.log(`${h}:${m}:${s} ${ampm}`);
+    if (isParty === false && (h>7 && h<12)) {
+        setImgAndTitle('morning');
+    }
+    if (isParty === false && (h>=12 && h<15)) {
+        setImgAndTitle('noon');
+    }
+    if (isParty === false && (h>13 && h<18)) {
+        setImgAndTitle('coding');
+    }
+}
+setInterval(time, 1000);
+
+function addZero(d) {
+    return d < 10 ? `0${d}` : d;
+}
+
+
+
 
 function setImgAndTitle(h) {
-    imageEl.src = titlesAndImgs[h].img;
-    messageEl.textContent = titlesAndImgs[h].message;
+    elements.imageEl.src = titlesAndImgs[h].img;
+    elements.messageEl.textContent = titlesAndImgs[h].message;
 }
 
 function startParty() {
     if (!isParty) {
-        messageText = messageEl.textContent;
-        partyImgEl.setAttribute('class', 'show');
-        partyBtn.textContent = 'Stop the party!';
+        messageText = elements.messageEl.textContent;
+        elements.partyImgEl.setAttribute('class', 'show');
+        elements.partyBtn.textContent = 'Stop the party!';
         isParty = true;
 
-        messageEl.textContent = 'Party';
+        elements.messageEl.textContent = 'Party';
     } else {
-        messageEl.textContent = messageText;
-        console.log(messageEl.textContent);
+        elements.messageEl.textContent = messageText;
         
-        partyImgEl.setAttribute('class', 'hidden');
-        partyBtn.textContent = "It's time to party!";
+        elements.partyImgEl.setAttribute('class', 'hidden');
+        elements.partyBtn.textContent = "It's time to party!";
         isParty = false;
 
     }
