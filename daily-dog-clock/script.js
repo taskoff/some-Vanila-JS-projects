@@ -3,8 +3,19 @@ const elements = {
     messageEl: document.querySelector('.message'),
     partyBtn: document.querySelector('.party-btn'),
     imageEl: document.querySelector('.img-container>img'),
-    partyImgEl: document.querySelector('.img-container div')
+    partyImgEl: document.querySelector('.img-container div'),
+    morningOptionEl: document.getElementById('morning'),
+    noonOptionEl: document.getElementById('noon'),
+    afternoonOptionEl: document.getElementById('afternoon'),
+
 }
+    let morningStart = elements.morningOptionEl.options[elements.morningOptionEl.selectedIndex].value;
+    let noonStart = elements.noonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
+    let afternoonStart = elements.afternoonOptionEl.options[elements.afternoonOptionEl.selectedIndex].value;
+    elements.morningOptionEl.addEventListener('change', cangeMorningTime);
+    elements.noonOptionEl.addEventListener('change', changeNoonTime);
+    elements.afternoonOptionEl.addEventListener('change', changeAfteroonTime);
+
 
 const titlesAndImgs = {
     morning: {
@@ -25,11 +36,24 @@ const dayTime = {
     afternoon: false
 }
 
+const startAndEndTime = {
+    morning: {
+        start: morningStart,
+        end: 12},
+    noon: {
+        start: noonStart,
+        end: 14},
+    afternoon: {
+        start: afternoonStart,
+        end: 17}
+}
+
 elements.partyBtn.addEventListener('click', startParty)
 let messageText = '';
 let isParty = false;
 let hour = 0;
 let timeOfDay = '';
+let counter = 0
 
 function time() {
     let date = new Date();
@@ -43,17 +67,21 @@ function time() {
     let sec = date.getSeconds();
     let s = addZero(sec);
     elements.clock.textContent = `${h}:${m}:${s} ${ampm}.`;
-    // console.log(`${h}:${m}:${s} ${ampm}`);
-    if (ho>7 && ho<12) {
+    console.log(startAndEndTime);
+    if (ho>=startAndEndTime.morning.start && ho<=startAndEndTime.morning.end) {
         timeOfDay = 'morning';
-    } else if(ho>=12 && ho<14){
+    } else if(ho>=startAndEndTime.noon.start && ho<=startAndEndTime.noon.end){
         timeOfDay = 'noon';
-    } else if(ho>13 && ho<18) {
+    } else if(ho>=startAndEndTime.afternoon.start && ho<=startAndEndTime.afternoon.end) {
         timeOfDay = 'afternoon';
     }
-    if (!isParty && dayTime[timeOfDay] === false) {
+    if (!isParty) {
         setImgAndTitle(timeOfDay);
-    }
+    } 
+    console.log(++counter)
+    // console.log(startAndEndTime.morning.start)
+    // console.log(startAndEndTime.afternoon.start)
+
     // if (isParty === false && (ho>7 && ho<12) && dayTime.morning === false) {
     //     setImgAndTitle('morning');
     // }
@@ -84,7 +112,7 @@ function setImgAndTitle(h) {
         }
     }
 
-    console.log(dayTime)
+    // console.log(dayTime)
 
 }
 
@@ -104,4 +132,18 @@ function startParty() {
         isParty = false;
 
     }
+}
+
+function cangeMorningTime () {
+    startAndEndTime.morning.start = elements.morningOptionEl.options[elements.morningOptionEl.selectedIndex].value;
+    startAndEndTime.morning.end = +startAndEndTime.morning.start+ 2;
+    // console.log(morningStart)
+}
+ function changeNoonTime() {
+     startAndEndTime.noon.start = elements.noonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
+     startAndEndTime.noon.end = +startAndEndTime.noon.start + 2;
+ }
+ function changeAfteroonTime() {
+    startAndEndTime.afternoon.start = elements.afternoonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
+    startAndEndTime.afternoon.end = +startAndEndTime.afternoon.start + 2;
 }
