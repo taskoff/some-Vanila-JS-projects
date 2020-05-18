@@ -19,10 +19,17 @@ const titlesAndImgs = {
     
 }
 
+const dayTime = {
+    morning: false,
+    noon: false,
+    afternoon: false
+}
+
 elements.partyBtn.addEventListener('click', startParty)
 let messageText = '';
 let isParty = false;
 let hour = 0;
+let timeOfDay = '';
 
 function time() {
     let date = new Date();
@@ -37,15 +44,25 @@ function time() {
     let s = addZero(sec);
     elements.clock.textContent = `${h}:${m}:${s} ${ampm}.`;
     // console.log(`${h}:${m}:${s} ${ampm}`);
-    if (isParty === false && (h>7 && h<12)) {
-        setImgAndTitle('morning');
+    if (ho>7 && ho<12) {
+        timeOfDay = 'morning';
+    } else if(ho>=12 && ho<14){
+        timeOfDay = 'noon';
+    } else if(ho>13 && ho<18) {
+        timeOfDay = 'afternoon';
     }
-    if (isParty === false && (h>=12 && h<15)) {
-        setImgAndTitle('noon');
+    if (!isParty && dayTime[timeOfDay] === false) {
+        setImgAndTitle(timeOfDay);
     }
-    if (isParty === false && (h>13 && h<18)) {
-        setImgAndTitle('coding');
-    }
+    // if (isParty === false && (ho>7 && ho<12) && dayTime.morning === false) {
+    //     setImgAndTitle('morning');
+    // }
+    // if (isParty === false && (ho>=12 && ho<14)) {
+    //     setImgAndTitle('noon');
+    // }
+    // if (isParty === false && (ho>13 && ho<18) && dayTime.afternoon === false) {
+    //     setImgAndTitle('afternoon');
+    // }
 }
 setInterval(time, 1000);
 
@@ -59,6 +76,16 @@ function addZero(d) {
 function setImgAndTitle(h) {
     elements.imageEl.src = titlesAndImgs[h].img;
     elements.messageEl.textContent = titlesAndImgs[h].message;
+    // dayTime[h] = true;
+    timeOfDay = h;
+    for (const t in dayTime) {
+        if (t === h) {
+            dayTime[t] = true;
+        }
+    }
+
+    console.log(dayTime)
+
 }
 
 function startParty() {
