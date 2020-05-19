@@ -13,9 +13,9 @@ const elements = {
     let morningStart = +elements.morning.options[elements.morning.selectedIndex].value;
     let noonStart = +elements.noon.options[elements.noon.selectedIndex].value;
     let afternoonStart = +elements.afternoon.options[elements.afternoon.selectedIndex].value;
-    elements.morning.addEventListener('change', cangeMorningTime);
-    elements.afternoon.addEventListener('change', cangeMorningTime);
-    elements.noon.addEventListener('change', cangeMorningTime);
+    elements.morning.addEventListener('change', changeDayTime);
+    elements.afternoon.addEventListener('change', changeDayTime);
+    elements.noon.addEventListener('change', changeDayTime);
 
 
 const titlesAndImgs = {
@@ -101,8 +101,6 @@ function setImgAndTitle(h) {
         }
     }
 
-    console.log(dayTime)
-
 }
 
 function startParty() {
@@ -123,7 +121,7 @@ function startParty() {
     }
 }
 
-function cangeMorningTime (e) {
+function changeDayTime (e) {
     
     let t = e.target.id;
     console.log(t)
@@ -133,5 +131,4 @@ function cangeMorningTime (e) {
     for (const t in dayTime) {
         dayTime[t] = false;
     }
-    console.log(startAndEndTime)
 }
