@@ -80,19 +80,7 @@ function time() {
         console.log(dayTime[timeOfDay])
         setImgAndTitle(timeOfDay);
     } 
-    // console.log(++counter)
-    // console.log(startAndEndTime.morning.start)
-    // console.log(startAndEndTime.afternoon.start)
 
-    // if (isParty === false && (ho>7 && ho<12) && dayTime.morning === false) {
-    //     setImgAndTitle('morning');
-    // }
-    // if (isParty === false && (ho>=12 && ho<14)) {
-    //     setImgAndTitle('noon');
-    // }
-    // if (isParty === false && (ho>13 && ho<18) && dayTime.afternoon === false) {
-    //     setImgAndTitle('afternoon');
-    // }
 }
 setInterval(time, 1000);
 
@@ -106,7 +94,6 @@ function addZero(d) {
 function setImgAndTitle(h) {
     elements.imageEl.src = titlesAndImgs[h].img;
     elements.messageEl.textContent = titlesAndImgs[h].message;
-    // dayTime[h] = true;
     timeOfDay = h;
     for (const t in dayTime) {
         if (t === h) {
@@ -148,11 +135,3 @@ function cangeMorningTime (e) {
     }
     console.log(startAndEndTime)
 }
-//  function changeNoonTime() {
-//      startAndEndTime.noon.start = +elements.noon.options[elements.noon.selectedIndex].value;
-//      startAndEndTime.noon.end = +startAndEndTime.noon.start + 2;
-//  }
-//  function changeAfteroonTime() {
-//     startAndEndTime.afternoon.start = Number(elements.afternoon.options[elements.noon.selectedIndex].value);
-//     startAndEndTime.afternoon.end = +startAndEndTime.afternoon.start + 2;
-// }
