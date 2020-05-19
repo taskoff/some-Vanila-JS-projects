@@ -4,17 +4,18 @@ const elements = {
     partyBtn: document.querySelector('.party-btn'),
     imageEl: document.querySelector('.img-container>img'),
     partyImgEl: document.querySelector('.img-container div'),
-    morningOptionEl: document.getElementById('morning'),
-    noonOptionEl: document.getElementById('noon'),
-    afternoonOptionEl: document.getElementById('afternoon'),
+    morning: document.getElementById('morning'),
+    noon: document.getElementById('noon'),
+    afternoon: document.getElementById('afternoon'),
 
 }
-    let morningStart = elements.morningOptionEl.options[elements.morningOptionEl.selectedIndex].value;
-    let noonStart = elements.noonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
-    let afternoonStart = elements.afternoonOptionEl.options[elements.afternoonOptionEl.selectedIndex].value;
-    elements.morningOptionEl.addEventListener('change', cangeMorningTime);
-    elements.noonOptionEl.addEventListener('change', changeNoonTime);
-    elements.afternoonOptionEl.addEventListener('change', changeAfteroonTime);
+
+    let morningStart = +elements.morning.options[elements.morning.selectedIndex].value;
+    let noonStart = +elements.noon.options[elements.noon.selectedIndex].value;
+    let afternoonStart = +elements.afternoon.options[elements.afternoon.selectedIndex].value;
+    elements.morning.addEventListener('change', cangeMorningTime);
+    elements.afternoon.addEventListener('change', cangeMorningTime);
+    elements.noon.addEventListener('change', cangeMorningTime);
 
 
 const titlesAndImgs = {
@@ -67,7 +68,7 @@ function time() {
     let sec = date.getSeconds();
     let s = addZero(sec);
     elements.clock.textContent = `${h}:${m}:${s} ${ampm}.`;
-    console.log(startAndEndTime);
+    // console.log(startAndEndTime);
     if (ho>=startAndEndTime.morning.start && ho<=startAndEndTime.morning.end) {
         timeOfDay = 'morning';
     } else if(ho>=startAndEndTime.noon.start && ho<=startAndEndTime.noon.end){
@@ -75,10 +76,11 @@ function time() {
     } else if(ho>=startAndEndTime.afternoon.start && ho<=startAndEndTime.afternoon.end) {
         timeOfDay = 'afternoon';
     }
-    if (!isParty) {
+    if (!isParty && dayTime[timeOfDay] === false) {
+        console.log(dayTime[timeOfDay])
         setImgAndTitle(timeOfDay);
     } 
-    console.log(++counter)
+    // console.log(++counter)
     // console.log(startAndEndTime.morning.start)
     // console.log(startAndEndTime.afternoon.start)
 
@@ -112,7 +114,7 @@ function setImgAndTitle(h) {
         }
     }
 
-    // console.log(dayTime)
+    console.log(dayTime)
 
 }
 
@@ -134,16 +136,23 @@ function startParty() {
     }
 }
 
-function cangeMorningTime () {
-    startAndEndTime.morning.start = elements.morningOptionEl.options[elements.morningOptionEl.selectedIndex].value;
-    startAndEndTime.morning.end = +startAndEndTime.morning.start+ 2;
-    // console.log(morningStart)
+function cangeMorningTime (e) {
+    
+    let t = e.target.id;
+    console.log(t)
+    startAndEndTime[t].start = +elements[t].options[elements[t].selectedIndex].value;
+    startAndEndTime[t].end = +startAndEndTime[t].start+ 1;
+
+    for (const t in dayTime) {
+        dayTime[t] = false;
+    }
+    console.log(startAndEndTime)
 }
- function changeNoonTime() {
-     startAndEndTime.noon.start = elements.noonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
-     startAndEndTime.noon.end = +startAndEndTime.noon.start + 2;
- }
- function changeAfteroonTime() {
-    startAndEndTime.afternoon.start = elements.afternoonOptionEl.options[elements.noonOptionEl.selectedIndex].value;
-    startAndEndTime.afternoon.end = +startAndEndTime.afternoon.start + 2;
-}
+//  function changeNoonTime() {
+//      startAndEndTime.noon.start = +elements.noon.options[elements.noon.selectedIndex].value;
+//      startAndEndTime.noon.end = +startAndEndTime.noon.start + 2;
+//  }
+//  function changeAfteroonTime() {
+//     startAndEndTime.afternoon.start = Number(elements.afternoon.options[elements.noon.selectedIndex].value);
+//     startAndEndTime.afternoon.end = +startAndEndTime.afternoon.start + 2;
+// }
