@@ -26,7 +26,7 @@ const titlesAndImgs = {
         message:"Let's go to have a lunch!",
         img: './img/lunch.jpg'},
     afternoon: {
-        message: 'Now you must coding!',
+        message: 'Now you must learning!',
         img: './img/coding.jpg'}
     
 }

@@ -1,8 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .main-container {
-    max-width: 80%;
+    /* max-width: 80%; */
+    min-height: 100vh;
     margin: auto;
     /* background: honeydew; */
     padding: 10px;
+    background-color: #FFFFB3;
 
 }
 
@@ -23,11 +30,11 @@
 
 .img-container {
     position: relative;
-    max-width: 50%;
+    max-width: 40%;
     margin: auto;
     overflow: hidden;
     border-radius: 5px;
-        
+    box-shadow: 0 0 5px black;
     }
     
     .img-container::before {
@@ -59,10 +66,38 @@
         padding: 10px;
         font-size: 1.5em;
     }
+    .message {
+        color: grey;
+        font-size: 1.5em;
+        padding: 10px;
+        margin: 0;
+    }
     .btn-box {
         text-align: center;
+        margin-top: 10px;
+    }
+    .party-btn {
+        padding: 5px;
+        background-color: grey;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        
+    }
+    .party-btn:hover {
+        background-color: #C2C289;
+        color: black;
     }
     .option-box {
         text-align: center;
     }
+    .option-box select {
+        margin: 5px;
+        
+    }
+    .option-box label {
+        font-size: 1.5em;
+        color: grey;
+    }
+
     
