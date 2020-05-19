@@ -100,4 +100,13 @@ body {
         color: grey;
     }
 
+    @media(max-width: 600px) {
+        .img-container {
+            max-width: 90%;
+        }
+        .img-container img {
+            height: auto;
+        }
+    }
+
     
