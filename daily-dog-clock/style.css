@@ -93,12 +93,13 @@ body {
     }
     .option-box select {
         margin: 5px;
-        
+        height: 2em;;
     }
     .option-box label {
         font-size: 1.5em;
         color: grey;
     }
+  
 
     @media(max-width: 600px) {
         .img-container {
