@@ -4,5 +4,5 @@
 ![alt text](https://raw.githubusercontent.com/taskoff/some-Vanila-JS-projects/master/daily-dog-clock/project.img/lunch.jpg)
 
 ### or Party Time
-![alt text](https://raw.githubusercontent.com/taskoff/some-Vanila-JS-project/master/daily-dog-clock/project.img/party.jpg)
+![alt text](https://raw.githubusercontent.com/taskoff/some-Vanila-JS-projects/master/daily-dog-clock/project.img/party.jpg)
 
