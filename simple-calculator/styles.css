@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+  }
+
+#calculator {
+    max-width: 27%;
+    margin: auto;
+    /* background-color: skyblue; */
+    margin-top: 50px;
+
+}
+.top {
+    display: flex;
+}
+#expressionOutput {
+    text-align: right;
+    flex-grow: 2;
+    font-size: 2em;
+}
+.keys {
+
+}
+button {
+    width: 3.1em;
+    height: 3em;
+    background-color: steelblue;
+    /* border: 4px solid white; */
+    font-size: 2em;
+    outline: none;
+    margin: 0;
+}
