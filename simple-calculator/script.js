@@ -7,16 +7,31 @@ elements.calc.addEventListener('click', getElement)
 
 
 let fn = '';
+let sn = '';
 const types = {
-    'digit': (n) => {
+    digit: (n) => {
         if (n==='.' && fn === '') {
             fn = '0'
         }
         fn += n
         },
-    'clear': () => {
+    clear: () => {
         fn = '';
+    },
+    operation: (v) =>{
+        if (v==='+') {
+            if (fn && !sn) {
+                sn = fn;
+                fn = ''
+             } 
+
+        } else if (v==='=') {
+            if (fn && sn) {
+                fn = Number(fn) + Number(sn);
+            }    
+        }
     }
+    
 }
 function getElement(e) {
     let type = e.target.getAttribute('class');
@@ -27,5 +42,6 @@ function getElement(e) {
 
 function addNum(d) {
     elements.output.textContent = d;
+    console.log(d)
 }
 
