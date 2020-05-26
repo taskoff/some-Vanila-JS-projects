@@ -33,11 +33,14 @@ const types = {
                 staff.sn = '';
                 staff.operator = '';},
     operation: o => {
-        staff.operator = o
-        if (staff.fn !== 0) {
+        if (staff.fn !== 0 && staff.sn === '') {
+            staff.operator = o
             staff.sn = staff.fn;
             staff.numForDispaly = staff.fn;
             staff.fn = [0];
+        } else if(staff.fn !== 0 && staff.sn !== '') {
+            makeOperation()
+            staff.operator = o;
         }
     },
     'equal': makeOperation
@@ -61,8 +64,9 @@ function makeOperation(){
     if(staff.fn && staff.sn) {
         let a = Number(staff.sn.join(''));
         let b = Number(staff.fn.join(''));
-        staff.fn = operators[staff.operator](b, a).toString().split();
-        staff.numForDispaly = staff.fn;
+        staff.sn = operators[staff.operator](b, a).toString().split();
+        staff.numForDispaly = staff.sn;
+        staff.fn = [0]
      }
 }
 
