@@ -5,14 +5,16 @@ const elements = {
 }
 elements.calc.addEventListener('click', getElement) 
 
-
-let fn = '';
-let sn = '';
-let operator = '';
-let result = '';
+const staff = {
+    fn: [0],
+    sn: '',
+    operator: '',
+    result: '',
+    numForDispaly: 0
+}
 const operators = {
     '+': (a,b)=>{return Number(a)+Number(b);},
-    '-': (a,b)=>{return Number(b)-Number(a)},
+    '-': (a,b)=>{return Number(b)-Number(a);},
     '/': (a,b)=>{return Number(b)/Number(a);},
     '*': (a,b)=>{return Number(b)*Number(a);},
     
@@ -20,15 +22,22 @@ const operators = {
 
 const types = {
     digit: (n) => {
-        if (n==='.' && fn === '') {fn = '0'}
-        fn += n
+        staff.fn.push(n);
+        if (staff.fn[0] === 0 && staff.fn[1] !== '.') {
+            staff.fn.shift()
+        }       
+        staff.numForDispaly = staff.fn;
         },
-    clear: () => {fn = '';},
+    clear: () => {staff.fn = [0];
+                staff.numForDispaly = staff.fn;
+                staff.sn = '';
+                staff.operator = '';},
     operation: o => {
-        operator = o
-        if (fn) {
-            sn = fn;
-            fn = ''
+        staff.operator = o
+        if (staff.fn !== 0) {
+            staff.sn = staff.fn;
+            staff.numForDispaly = staff.fn;
+            staff.fn = [0];
         }
     },
     'equal': makeOperation
@@ -41,17 +50,19 @@ function getElement(e) {
     let value = e.target.value;
     types[type](value);
 
-    addNum(fn)
+    addNum(staff.numForDispaly)
 }
 
 function addNum(d) {
-    elements.output.textContent = d;
+    elements.output.textContent = d.join('');
 }
 
 function makeOperation(){
-    if(fn && sn) {
-        result = operators[operator](fn, sn);
-        fn = result
+    if(staff.fn && staff.sn) {
+        let a = Number(staff.sn.join(''));
+        let b = Number(staff.fn.join(''));
+        staff.fn = operators[staff.operator](b, a).toString().split();
+        staff.numForDispaly = staff.fn;
      }
 }
 
