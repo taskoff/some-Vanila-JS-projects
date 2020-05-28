@@ -59,3 +59,10 @@ button {
 .clear {
     /* padding: 20px 37px; */
 }
+.text {
+    max-width: 27%;
+    margin: auto;
+    text-align: left;
+    font-style: italic;
+    padding-top: 10px;
+}
