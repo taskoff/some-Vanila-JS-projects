@@ -3,7 +3,8 @@ const elements = {
     calc: document.getElementById('calculator'),
     output: document.getElementById('expressionOutput')
 }
-elements.calc.addEventListener('click', getElement) 
+elements.calc.addEventListener('click', getElement);
+window.addEventListener('keydown', keyHandler); 
 
 const staff = {
     fn: [0],
@@ -68,5 +69,19 @@ function makeOperation(){
         staff.numForDispaly = staff.sn;
         staff.fn = [0]
      }
+}
+const symbols = ['+', '-', '/', '*']
+function keyHandler(e) {
+    
+    if (e.key == Number(e.key)) {
+        let value = e.key;
+        types['digit'](value);
+        addNum(staff.numForDispaly)
+        
+    } else if (symbols.includes(e.key)) {
+        types.operation(e.key);
+    }
+    console.log(e.key)
+    // console.log(e.key)
 }
 
